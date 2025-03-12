@@ -52,9 +52,10 @@ class SpeechRecognitionHandler {
 
     updateOutput(text) {
         const outputDiv = document.getElementById('output');
-        if (outputDiv) {
-            outputDiv.textContent = text;
-        }
+        outputDiv.textContent = text;
+        setTimeout(() => {
+            outputDiv.textContent = '';
+        }, 2000);
     }
 
     updateButton() {
