@@ -75,13 +75,13 @@ window.onload = function () {
     // sfruttando le azioni salvate per tutti i comandi già associati a un'azione
 
     window.speechHandler.addVocalCommand("colora", () => {
-        const menuItems = ["strumenti", "modifica", "file", "visualizza", "opzioni"];
+        const menuItems = ["file", "visualizza", "modifica", "strumenti", "opzioni"];
 
         menuItems.forEach((menu, index) => {
             setTimeout(() => {
                 window.speechHandler.selectMenuItem(menu);
                 window.speechHandler.clickSelectedMenuItem();  // Attiva l'azione registrata on click
-            }, index*1000);
+            }, index*2500);
         });
     });
 
