@@ -78,7 +78,7 @@
   </style>
 </head>
 <body>
-<h2>Demo interazione menu mediante Speech Recognition</h2>
+<h2>Demo interazione modalità combinata</h2>
 <div class="container">
   <!-- Sezione per il riconoscimento vocale -->
   <div class="recognition-box">
@@ -87,37 +87,33 @@
     <button id="toggleButton" class="off">Attiva Riconoscimento</button>
     <div id="output" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc; height: 100px; overflow-y: scroll;"></div>
   </div>
+</div>
 
-  <!-- Finestra con il menu -->
-  <div id="window" class="window">
-    <div class="window-header">
-      <div class="menu">
-        <ul>
-          <li class="menu-item" id="file">File</li>
-          <li class="menu-item" id="visualizza">Visualizza</li>
-          <li class="menu-item" id="modifica">Modifica</li>
-          <li class="menu-item" id="strumenti">Strumenti</li>
-          <li class="menu-item" id="opzioni">Opzioni</li>
-        </ul>
-      </div>
+<!-- Finestra con il menu -->
+<div id="window" class="window">
+  <div class="window-header">
+    <div class="menu">
+      <ul>
+        <li class="menu-item" id="multiaction">Multifunzione</li>
+      </ul>
     </div>
-    <div class="window-content">
-      <p>Contenuto interattivo della finestra</p>
-    </div>
+  </div>
+  <div class="window-content">
+    <p>Questo tasto ha il nome <i>multiaction</i>, ma ha anche un alias <i>ciao</i>, quindi
+    può essere selezionato con il comando <strong>seleziona multiaction</strong> ma anche
+    <strong>seleziona ciao</strong>.<br>
+    Può svolgere tre funzioni diverse nel caso di click vocale, click col mouse o input
+    combinato. Per il comando combinato, attivare il riconoscimento vocale, effettuare un
+    long press sul tasto e nel frattempo dire <strong>combinato</strong>, quindi smettere di
+    cliccare (quando viene rilasciato il long press, il background del tasto si colora di rosso).</p>
   </div>
 </div>
 
 <div>
-  Le keyword utilizzabili nel riconoscimento vocale sono le seguenti:
-  <ul>
-    <li>Seleziona (nome elemento) --> seleziona l'elemento</li>
-    <li>Clicca --> simula il click sull'elemento attualmente selezionato</li>
-    <li>Annulla --> annulla la selezione dell'elemento attualmente selezionato</li>
-    <li>Ferma --> ferma il riconoscimento vocale</li>
-  </ul>
+ Premi il bottone e parla
 </div>
 
 <script src="js/speech_recognition.js"></script>
-<script src="js/prova1.js"></script>
+<script src="js/prova2.js"></script>
 </body>
 </html>
