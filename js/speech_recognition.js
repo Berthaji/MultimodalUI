@@ -194,12 +194,19 @@ class SpeechRecognitionHandler {
         // Trova l'elemento e aggiungi l'evento onclick
         const menuElement = document.getElementById(`${menuName}`);
         if (menuElement) {
-                menuElement.addEventListener("click", () => {
+            // Gestione del click del mouse
+            menuElement.addEventListener("click", (e) => {
+                // Verifica se è in corso un'azione combinata
+                if (this.isDoingCombinedAction) {
+                    e.preventDefault(); // Blocca l'azione del click
+                    console.log(`[DEBUG] Azione combinata in corso, click del mouse evitato per ${menuName}`);
+                } else {
+                    console.log(`[DEBUG] Click normale su ${menuName}`);
+                    // Esegui l'azione di click del mouse solo se non è un'azione combinata
                     this.selectMenuItem(menuName);
-                    this.clickMenuItem(false);  // false perché è un click del mouse
-                });
-
-
+                    action(menuElement);  // Esegui l'azione associata al click del mouse
+                }
+            });
         }
     }
 
