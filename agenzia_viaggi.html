@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenzia Viaggi - Prenotazione</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+
+        /* Toolbar */
+        .toolbar { background-color: #007bff; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .toolbar .logo { font-size: 20px; font-weight: bold; }
+        .toolbar nav a { color: white; text-decoration: none; margin: 0 15px; font-size: 16px; }
+        .toolbar nav a:hover { text-decoration: underline; }
+
+        /* Layout */
+        .container { display: flex; max-width: 1200px; margin: 20px auto; gap: 20px; }
+
+        /* Contenuto principale */
+        .main-content { flex: 3; background: white; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 5px; }
+        .ads { flex: 1; background: #fff; padding: 15px; text-align: center; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
+
+        /* Moduli */
+        label { font-weight: bold; display: block; margin-top: 10px; }
+        input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+        button { width: 100%; padding: 10px; margin-top: 15px; border: none; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; border-radius: 5px; }
+        button:hover { background-color: #218838; }
+
+        /* Stili per il pulsante di riconoscimento vocale */
+        #toggleButton { background-color: #ff9800; }
+        #toggleButton.off { background-color: #f44336; }
+        #output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #fff; height: 60px; overflow-y: auto; text-align: center; font-size: 18px; }
+
+    </style>
+</head>
+<body>
+
+<!-- Toolbar -->
+<div class="toolbar">
+    <div class="logo">🌍 Agenzia Viaggi</div>
+
+    <div>
+        <button id="toggleButton" class="off">Attiva Riconoscimento Vocale</button>
+    </div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Offerte</a>
+        <a href="#">Contatti</a>
+    </nav>
+</div>
+
+<!-- Layout principale -->
+<div class="container">
+    <!-- Contenuto principale -->
+    <div class="main-content">
+        <h1>Prenota il tuo viaggio</h1>
+
+        <label for="destination">Destinazione:</label>
+        <select id="destination">
+            <option value="Roma">Roma</option>
+            <option value="Parigi">Parigi</option>
+            <option value="New York">New York</option>
+            <option value="Tokyo">Tokyo</option>
+        </select>
+
+        <label for="departure">Data di Partenza:</label>
+        <input type="date" id="departure">
+
+        <label for="return">Data di Ritorno:</label>
+        <input type="date" id="return">
+
+        <button id="bookButton">Prenota</button>
+
+        <div id="output">Output vocale</div>
+    </div>
+
+    <!-- Sezione Ads -->
+    <div class="ads">
+        <h3>Pubblicità</h3>
+        <img src="/img/banner.jpg" alt="Promo Viaggi" height="400" width="160">
+    </div>
+</div>
+
+<!-- Inclusione degli script -->
+<script src="/js/speech_recognition.js"></script>
+<script src="/js/agenzia.js"></script>
+
+</body>
+</html>
