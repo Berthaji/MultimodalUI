@@ -18,44 +18,44 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => { outputDiv.textContent = ""; }, 3000);
     }
 
-    // Funzione per selezionare la destinazione e simulare un cambio "manuale"
+    // Funzione per selezionare la destinazione
     function selectDestination(city) {
         const destinationSelect = document.getElementById("destination");
-        destinationSelect.value = city; // imposta l'opzione corrispondente
+        destinationSelect.value = city;
         destinationSelect.dispatchEvent(new Event("change"));
     }
 
-    // Aggiorna l'output quando l'utente cambia manualmente la destinazione
-    document.getElementById("destination").addEventListener("change", function () {
-        showMessage(`Destinazione selezionata: ${this.value}`);
-    });
-
     // Mappa dei comandi vocali per le città
     const cityCommands = {
-        "seleziona roma": "Roma",
-        "seleziona parigi": "Parigi",
-        "seleziona new york": "New York",
-        "seleziona tokyo": "Tokyo"
+        "scegli roma": "Roma",  //non usare "seleziona", entra in conflitto con il comando seleziona di processVoiceCommands
+        "scegli parigi": "Parigi",
+        "scegli new york": "New York",
+        "scegli tokyo": "Tokyo"
     };
 
-    // Estendiamo il metodo onresult per gestire manualmente i comandi vocali
-    // (Nota: questo esempio presuppone che SpeechRecognitionHandler utilizzi la proprietà "recognition")
-    const originalOnResult = window.speechHandler.recognition.onresult;
-    window.speechHandler.recognition.onresult = function (event) {
-        let transcript = event.results[event.resultIndex][0].transcript.toLowerCase().trim();
-        console.log("Riconosciuto:", transcript);
-
-        // Controlla se il testo riconosciuto corrisponde a uno dei comandi per le città
-        Object.keys(cityCommands).forEach(command => {
-            if (transcript.includes(command)) {
-                selectDestination(cityCommands[command]);
-                showMessage(`Destinazione selezionata: ${cityCommands[command]}`);
-            }
+    // Registra i comandi vocali per le città
+    Object.keys(cityCommands).forEach(command => {
+        window.speechHandler.addVocalCommand(command, () => {
+            selectDestination(cityCommands[command]);
+            showMessage(`Destinazione selezionata: ${cityCommands[command]}`); // Aggiungi questa linea
         });
+    });
 
-        // Gestione delle date e prenotazione (resta invariata)
-        // Ad esempio, se dici "imposta partenza 20 marzo 2025"
-        let departureRegex = /imposta partenza (\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(\d{4})/i;
+    // Funzione per convertire il mese in numero
+    function convertMonthNameToNumber(monthName) {
+        const months = {
+            "gennaio": "01", "febbraio": "02", "marzo": "03", "aprile": "04",
+            "maggio": "05", "giugno": "06", "luglio": "07", "agosto": "08",
+            "settembre": "09", "ottobre": "10", "novembre": "11", "dicembre": "12"
+        };
+        return months[monthName.toLowerCase()] || null;
+    }
+
+    const departureRegex = /imposta partenza (\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(\d{4})/i;
+    const returnRegex = /imposta ritorno (\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(\d{4})/i;
+
+    // Aggiungi il comando vocale "imposta partenza"
+    window.speechHandler.addVocalCommand(departureRegex, (transcript) => {
         let departureMatch = transcript.match(departureRegex);
         if (departureMatch) {
             let day = departureMatch[1].padStart(2, '0');
@@ -65,8 +65,9 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("departure").value = dateStr;
             showMessage(`Data di partenza impostata: ${day}/${month}/${year}`);
         }
+    });
 
-        let returnRegex = /imposta ritorno (\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(\d{4})/i;
+    window.speechHandler.addVocalCommand(returnRegex, (transcript) => {
         let returnMatch = transcript.match(returnRegex);
         if (returnMatch) {
             let day = returnMatch[1].padStart(2, '0');
@@ -76,39 +77,16 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("return").value = dateStr;
             showMessage(`Data di ritorno impostata: ${day}/${month}/${year}`);
         }
+    });
 
-        // Se dici "prenota", simula il click sul pulsante Prenota
-        if (transcript.includes("prenota")) {
-            document.getElementById('bookButton').click();
-        }
+    // Registra il comando vocale per la prenotazione
+    window.speechHandler.addVocalCommand("prenota", () => {
+        document.getElementById('bookButton').click();
+        showMessage("Prenotazione avviata"); // Aggiungi questa linea
+    });
 
-        // Chiamare anche il metodo originale (se necessario)
-        if (typeof originalOnResult === "function") {
-            originalOnResult.call(this, event);
-        }
-    };
-
-    // Funzione per convertire il nome del mese italiano in numero a due cifre
-    function convertMonthNameToNumber(monthName) {
-        const months = {
-            "gennaio": "01",
-            "febbraio": "02",
-            "marzo": "03",
-            "aprile": "04",
-            "maggio": "05",
-            "giugno": "06",
-            "luglio": "07",
-            "agosto": "08",
-            "settembre": "09",
-            "ottobre": "10",
-            "novembre": "11",
-            "dicembre": "12"
-        };
-        return months[monthName.toLowerCase()] || "01";
-    }
-
-    // Associa l'evento di click al pulsante Prenota (per l'interazione manuale)
-    document.getElementById('bookButton').addEventListener('click', function () {
+    // Associa l'evento di click al pulsante Prenota
+    window.speechHandler.onMouseClick('bookButton', () => {
         let dest = document.getElementById("destination").value;
         let dep = document.getElementById("departure").value;
         let ret = document.getElementById("return").value;
@@ -118,5 +96,10 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         alert(`Viaggio prenotato per ${dest} dal ${dep} al ${ret}!`);
+    });
+
+    // Aggiorna l'output quando si cambia la destinazione manualmente
+    document.getElementById("destination").addEventListener("change", function () {
+        showMessage(`Destinazione selezionata: ${this.value}`);
     });
 });

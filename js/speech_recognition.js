@@ -74,7 +74,6 @@ class SpeechRecognitionHandler {
     }
 
     processVoiceCommand(command) {
-
         // 🔹 Se esiste un alias, lo converte nel nome del menu effettivo
         let final_command = this.menuAliases[command] || command;
 
@@ -88,7 +87,7 @@ class SpeechRecognitionHandler {
             }
         } else if (final_command.startsWith("seleziona ")) {
             final_command = final_command.replace("seleziona ", "").trim();
-            final_command= this.menuAliases[final_command] || final_command;
+            final_command = this.menuAliases[final_command] || final_command;
             this.selectMenuItem(final_command);
         } else if (final_command === "annulla") {
             this.clearSelection();
@@ -97,11 +96,19 @@ class SpeechRecognitionHandler {
         } else if (this.customVocalCommands[final_command]) {
             // Se il comando è personalizzato, eseguilo
             this.customVocalCommands[final_command]();
+        } else {
+            // Verifica se esiste un comando con regex
+            for (let regexCommand of this.customVocalCommands.regex || []) {
+                if (regexCommand.regex.test(command)) {
+                    regexCommand.callback(command);  // Esegui il callback se c'è corrispondenza
+                }
+            }
         }
-        if(this.isPressed){ //se l'item subisce un long press
+        if (this.isPressed) { // se l'item subisce un long press
             this.receivedVoiceInput = final_command;
         }
     }
+
 
     // Seleziona l'elemento del menu
     selectMenuItem(menu) {
@@ -216,7 +223,14 @@ class SpeechRecognitionHandler {
 
     // *** Metodo per aggiungere nuovi comandi ***
     addVocalCommand(command, callback) {
-        this.customVocalCommands[command.toLowerCase().trim()] = callback;
+        if (typeof command === "string") {
+            command = command.toLowerCase().trim();
+            this.customVocalCommands[command] = callback;
+        } else if (command instanceof RegExp) {
+            // Aggiungi la regex alla lista delle regex
+            this.customVocalCommands.regex = this.customVocalCommands.regex || [];
+            this.customVocalCommands.regex.push({ regex: command, callback });
+        }
     }
 
     addVocalItemAlias(alias, itemName) {
@@ -226,4 +240,3 @@ class SpeechRecognitionHandler {
 
 
 }
-
