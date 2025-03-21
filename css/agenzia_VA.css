@@ -1,0 +1,76 @@
+/* Overlay a piena pagina */
+.overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.5) !important; /* Sfondo semitrasparente */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 9999 !important;
+}
+/* Contenitore centrale dell'overlay */
+.overlay-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    max-width: 300px;
+    width: 90%;
+}
+/* Lista delle opzioni */
+.overlay-content ul {
+    list-style: none; /* Rimuove i punti elenco */
+    margin: 0;
+    padding: 0;
+}
+.overlay-content li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+.overlay-content li:hover {
+    background: #f0f0f0;
+}
+.overlay-content li:last-child {
+    border-bottom: none;
+}
+
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+
+/* Toolbar */
+.toolbar { background-color: #007bff; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+.toolbar .logo { font-size: 20px; font-weight: bold; }
+.toolbar nav a { color: white; text-decoration: none; margin: 0 15px; font-size: 16px; }
+.toolbar nav a:hover { text-decoration: underline; }
+
+/* Layout */
+.container { display: flex; max-width: 1200px; margin: 20px auto; gap: 20px; }
+
+/* Contenuto principale */
+.main-content { flex: 3; background: white; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 5px; }
+.ads { flex: 1; background: #fff; padding: 15px; text-align: center; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
+
+/* Moduli */
+label { font-weight: bold; display: block; margin-top: 10px; }
+input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+button { width: 100%; padding: 10px; margin-top: 15px; border: none; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; border-radius: 5px; }
+button:hover { background-color: #218838; }
+
+/* Stili per il pulsante di riconoscimento vocale */
+#toggleButton { background-color: #ff9800; }
+#toggleButton.off { background-color: #f44336; }
+#output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #fff; height: 60px; overflow-y: auto; text-align: center; font-size: 18px; }
+
+/* Stile per oggetti non interagibili */
+.non-interagibile,
+.non-interagibile * {
+    pointer-events: none;
+}
+
+/* Se vuoi mantenere uno stile particolare per l'elemento, puoi comunque impostare il cursore */
+.non-interagibile {
+    cursor: not-allowed;
+}

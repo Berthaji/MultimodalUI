@@ -19,7 +19,7 @@ class SpeechRecognitionHandler {
         if ('webkitSpeechRecognition' in window) {
             this.recognition = new webkitSpeechRecognition();
             this.recognition.continuous = true;  // Mantieni il riconoscimento in ascolto
-            this.recognition.interimResults = false;  // Mostra solo i risultati definitivi
+            this.recognition.interimResults = true;  // Mostra solo i risultati definitivi
             this.recognition.lang = 'it-IT';  // Imposta la lingua italiana
 
             this.recognition.onresult = (event) => {

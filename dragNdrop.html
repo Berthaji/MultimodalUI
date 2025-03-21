@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trascinamento Icone</title>
+    <link rel="stylesheet" href="/css/dragNdrop.css">
+</head>
+<body>
+
+<button id="toggleButton">Attiva riconoscimento vocale</button>
+<div id="output">Output vocale</div>
+<a href="index.html" style="display: inline-flex; align-items: center; background: white; color: #ff5277; border: none; border-radius: 50px; padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); text-decoration: none; transition: .3s;">
+    <span style="margin-right: 8px;">🏠</span> Home
+</a>
+
+<div id="container">
+    <div class="draggable" id="item1" style="left: 450px; top: 200px;">
+        <img src="/img/file.png" alt="File" width="80" height="80">
+        <span>File 1</span>
+    </div>
+    <div class="draggable" id="item2" style="left: 750px; top: 200px;">
+        <img src="/img/file.png" alt="File" width="80" height="80">
+        <span>File 2</span>
+    </div>
+</div>
+<script src="/js/dragNdrop.js"></script>
+<script src="/js/speech_recognition.js"></script>
+</body>
+</html>

@@ -4,49 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenzia Viaggi - Prenotazione</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-
-        /* Toolbar */
-        .toolbar { background-color: #007bff; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .toolbar .logo { font-size: 20px; font-weight: bold; }
-        .toolbar nav a { color: white; text-decoration: none; margin: 0 15px; font-size: 16px; }
-        .toolbar nav a:hover { text-decoration: underline; }
-
-        /* Layout */
-        .container { display: flex; max-width: 1200px; margin: 20px auto; gap: 20px; }
-
-        /* Contenuto principale */
-        .main-content { flex: 3; background: white; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 5px; }
-        .ads { flex: 1; background: #fff; padding: 15px; text-align: center; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
-
-        /* Moduli */
-        label { font-weight: bold; display: block; margin-top: 10px; }
-        input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
-        button { width: 100%; padding: 10px; margin-top: 15px; border: none; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; border-radius: 5px; }
-        button:hover { background-color: #218838; }
-
-        /* Stili per il pulsante di riconoscimento vocale */
-        #toggleButton { background-color: #ff9800; }
-        #toggleButton.off { background-color: #f44336; }
-        #output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #fff; height: 60px; overflow-y: auto; text-align: center; font-size: 18px; }
-
-    </style>
+    <link rel="stylesheet" href="css/agenzia.css">
 </head>
 <body>
 
 <!-- Toolbar -->
-<div class="toolbar">
+<div class="toolbar" id="home">
     <div class="logo">🌍 Agenzia Viaggi</div>
 
     <div>
         <button id="toggleButton" class="off">Attiva Riconoscimento Vocale</button>
     </div>
 
+    <a href="index.html" style="display: inline-flex; align-items: center; background: white; color: #ff5277; border: none; border-radius: 50px; padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); text-decoration: none; transition: .3s;">
+        <span style="margin-right: 8px;">🏠</span> Home
+    </a>
+
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Offerte</a>
-        <a href="#">Contatti</a>
+        <a href="#home" onclick="alert('Cliccato Home')" id="homeLink">Home</a>
+        <a href="#home" onclick="alert('Cliccato Offerte')" id="offerteLink">Offerte</a>
+        <a href="#home" onclick="alert('Cliccato Contatti')" id="contattiLink">Contatti</a>
     </nav>
 </div>
 
