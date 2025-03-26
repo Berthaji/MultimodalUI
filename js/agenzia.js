@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
         window.speechHandler.toggleListening();
     });
 
+    function showMessage(msg) {
+        const outputDiv = document.getElementById("output");
+        outputDiv.textContent = msg;
+        setTimeout(() => { outputDiv.textContent = ""; }, 3000);
+    }
+
+
     document.addEventListener('mousedown', function (event) {
         let target = event.target;
 
@@ -16,11 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    function showMessage(msg) {
-        const outputDiv = document.getElementById("output");
-        outputDiv.textContent = msg;
-        setTimeout(() => { outputDiv.textContent = ""; }, 3000);
-    }
+    document.addEventListener('mousemove', function (event) {
+        elementoSottoMouse = event.target;
+
+        if (elementoSottoMouse.tagName === 'A') {
+            console.log("Il mouse punta un link");
+        } else if (elementoSottoMouse.tagName === 'SELECT') {
+            console.log("Il mouse punta una tendina di selezione");
+        } else if (elementoSottoMouse.tagName === 'INPUT') {
+            console.log("Il mouse punta un campo di input");
+        } else if (elementoSottoMouse.tagName === 'BUTTON') {
+            console.log("Il mouse punta un bottone");
+        }
+    });
 
     // Funzione per il comando vocale "clicca"
     window.speechHandler.addVocalCommand("click", () => {
