@@ -237,6 +237,29 @@ class SpeechRecognitionHandler {
         this.menuAliases[alias] = itemName;
     }
 
+    // Metodo per ottenere l'elemento sotto il mouse
+    getElementUnderMouse() {
+        return document.querySelector(':hover');
+    }
 
+    // Metodo per verificare se l'elemento è "non-interagibile"
+    isElementNonInteractive(element) {
+        return element && element.classList.contains("non-interagibile");
+    }
+
+    // Metodo per impostare un elemento come interagibile
+    setElementInteractive(element, isInteractive) {
+        if (element) {
+            if (isInteractive) {
+                element.classList.remove("non-interagibile");
+            } else {
+                element.classList.add("non-interagibile");
+            }
+        }
+    }
+
+    containsKeyword(stringa, keyword){
+        return stringa.includes(keyword);
+    }
 
 }
