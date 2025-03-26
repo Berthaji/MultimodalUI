@@ -239,7 +239,8 @@ class SpeechRecognitionHandler {
 
     // Metodo per ottenere l'elemento sotto il mouse
     getElementUnderMouse() {
-        return document.querySelector(':hover');
+        const hoveredElements = Array.from(document.querySelectorAll(':hover'));
+        return hoveredElements[hoveredElements.length - 1] || null;
     }
 
     // Metodo per verificare se l'elemento è "non-interagibile"
