@@ -263,4 +263,45 @@ class SpeechRecognitionHandler {
         return stringa.includes(keyword);
     }
 
+    //pemette di far funzionare correttamente l'apertura di menu a tendina come una data
+    //(tipo 'select') quando si usano i comandi vocali
+    showSelectOverlay(selectId) {
+        const elemento = document.getElementById(selectId);
+
+        const existingOverlay = document.querySelector('.overlay');
+        if (existingOverlay) {
+            existingOverlay.remove();
+        }
+
+        const overlay = document.createElement('div');
+        overlay.classList.add('overlay');
+
+        const content = document.createElement('div');
+        content.classList.add('overlay-content');
+
+        const ul = document.createElement('ul');
+
+        Array.from(elemento.options).forEach(option => {
+            const li = document.createElement('li');
+            li.textContent = option.text;
+
+            li.addEventListener('click', () => {
+                elemento.value = option.value;
+                elemento.dispatchEvent(new Event('change'));
+                document.body.removeChild(overlay);
+            });
+
+            ul.appendChild(li);
+        });
+
+        content.appendChild(ul);
+        overlay.appendChild(content);
+        document.body.appendChild(overlay);
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                document.body.removeChild(overlay);
+            }
+        });
+    }
 }

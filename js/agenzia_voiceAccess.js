@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', function () {
         window.speechHandler.toggleListening();
     });
 
+
+
     // Click con voce e mouse hover
-    let elementoSottoMouse = null;
     document.addEventListener('mousemove', function(event) {
         // event.target è l'elemento su cui si trova il mouse
         elementoSottoMouse = event.target;
@@ -28,17 +29,17 @@ document.addEventListener('DOMContentLoaded', function () {
     window.speechHandler.addVocalCommand("click", () => {
         console.log("Comando vocale 'clicca' attivato");
 
-        if (elementoSottoMouse) {
-            console.log("Elemento cliccato:", elementoSottoMouse);
+        if (window.speechHandler.getElementUnderMouse()) {
+            console.log("Elemento cliccato:", window.speechHandler.getElementUnderMouse());
 
             // Controlla se l'elemento è già stato cliccato di recente
-            if (lastClickedElement === elementoSottoMouse) {
+            if (lastClickedElement === window.speechHandler.getElementUnderMouse()) {
                 console.log("L'elemento è già stato cliccato recentemente.");
                 return;  // Esci dalla funzione se l'elemento è già stato cliccato
             }
 
             // Aggiorna l'elemento cliccato recentemente
-            lastClickedElement = elementoSottoMouse;
+            lastClickedElement = window.speechHandler.getElementUnderMouse();
 
             // Crea un evento MouseEvent per simulare il click
             let evt = new MouseEvent('click', {
@@ -48,29 +49,29 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             // Esegui l'azione in base al tipo dell'elemento
-            let tag = elementoSottoMouse.tagName.toLowerCase();
+            let tag = window.speechHandler.getElementUnderMouse().tagName.toLowerCase();
 
             if (tag === 'a' || tag === 'button') {
                 // Per <a> e <button>, possiamo semplicemente eseguire il click
-                elementoSottoMouse.dispatchEvent(evt);
+                window.speechHandler.getElementUnderMouse().dispatchEvent(evt);
             } else if (tag === 'select') {
-                // Per <select>, dobbiamo aprire la tendina
-                showSelectOverlay(elementoSottoMouse.id);
-            } else if (tag === 'input' && elementoSottoMouse.type === 'date') {
+                // Per <select>, aprire la tendina
+                window.speechHandler.showSelectOverlay(window.speechHandler.getElementUnderMouse().id);
+            } else if (tag === 'input' && window.speechHandler.getElementUnderMouse().type === 'date') {
                 // Per <input type="date">, cerchiamo di aprire il picker data
-                if (typeof elementoSottoMouse.showPicker === 'function') {
-                    elementoSottoMouse.showPicker(); // Usa il picker se il browser lo supporta
+                if (typeof window.speechHandler.getElementUnderMouse().showPicker === 'function') {
+                    window.speechHandler.getElementUnderMouse().showPicker(); // Usa il picker se il browser lo supporta
                 } else {
-                    elementoSottoMouse.focus();
-                    elementoSottoMouse.dispatchEvent(evt); // Simula il click per altri browser
+                    window.speechHandler.getElementUnderMouse().focus();
+                    window.speechHandler.getElementUnderMouse().dispatchEvent(evt); // Simula il click per altri browser
                 }
             } else if (tag === 'input') {
                 // Per gli altri tipi di input, basta fare focus e dispatchare l'evento
-                elementoSottoMouse.focus();
-                elementoSottoMouse.dispatchEvent(evt);
+                window.speechHandler.getElementUnderMouse().focus();
+                window.speechHandler.getElementUnderMouse().dispatchEvent(evt);
             } else {
                 // Per altri tipi di elementi, esegui semplicemente il click
-                elementoSottoMouse.dispatchEvent(evt);
+                window.speechHandler.getElementUnderMouse().dispatchEvent(evt);
             }
 
             // Imposta un timeout per resettare l'elemento cliccato dopo un breve periodo (es. 1 secondo)
@@ -83,60 +84,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    function showSelectOverlay(selectId) {
-        var elemento = document.getElementById(selectId);
+    window.speechHandler.addVocalCommand("mostra etichette", () => {
+        document.getElementById("toggleLabels").click();
+    })
 
-        // Verifica se esiste già un overlay e, in tal caso, rimuovilo
-        const existingOverlay = document.querySelector('.overlay');
-        if (existingOverlay) {
-            existingOverlay.remove();
-        }
-
-        // Crea l'elemento overlay
-        const overlay = document.createElement('div');
-        overlay.classList.add('overlay');
-
-        // Crea il contenitore del contenuto
-        const content = document.createElement('div');
-        content.classList.add('overlay-content');
-
-        // Crea la lista delle opzioni
-        const ul = document.createElement('ul');
-
-        // Itera sulle opzioni del select
-        Array.from(elemento.options).forEach(option => {
-            const li = document.createElement('li');
-            li.textContent = option.text;
-
-            // Aggiungi un evento click per selezionare l'opzione
-            li.addEventListener('click', () => {
-                // Imposta il valore del select in base all'opzione scelta
-                elemento.value = option.value;
-                // Dispatch dell'evento change se necessario
-                elemento.dispatchEvent(new Event('change'));
-                // Rimuove l'overlay
-                document.body.removeChild(overlay);
-            });
-
-            ul.appendChild(li);
-        });
-
-        content.appendChild(ul);
-        overlay.appendChild(content);
-        document.body.appendChild(overlay);
-
-        // Aggiungi un listener per rimuovere l'overlay quando si clicca fuori dal contenuto
-        overlay.addEventListener('click', (e) => {
-            // Se il clic è fuori dal contenuto, rimuove l'overlay
-            if (e.target === overlay) {
-                document.body.removeChild(overlay);
-            }
-        });
-    }
-
-    function containsKeyword(stringa, keyword){
-        return stringa.includes(keyword);
-    }
 
     // Controlla le keyword per capire quale oggetto disattivare in quanto lo si sta modificando
     var output = document.getElementById('output');
@@ -145,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var observer = new MutationObserver(function (mutationsList) {
         mutationsList.forEach(function (mutation) {
             if (mutation.type === 'childList' || mutation.type === 'characterData') {
-                aggiornaInterattività(output.textContent);
+                aggiornaInterattivita(output.textContent);
             }
         });
     });
@@ -153,36 +104,36 @@ document.addEventListener('DOMContentLoaded', function () {
     // Configura il MutationObserver per monitorare il nodo di testo dentro "output"
     observer.observe(output, { childList: true, characterData: true, subtree: true });
 
-    function aggiornaInterattività(testo) {
+    function aggiornaInterattivita(testo) {
         console.log("aggiorno interattività")
         if (testo.trim() === "") {
             setTimeout(function() {
                 // Qui scrivi il codice da eseguire dopo l'attesa
-                document.getElementById("destination").classList.remove("non-interagibile");
+                window.speechHandler.setElementInteractive(document.getElementById("destination"), true);
                 document.getElementById("destination").style.backgroundColor = "white";
 
-                document.getElementById("departure").classList.remove("non-interagibile");
+                window.speechHandler.setElementInteractive(document.getElementById("departure"), true);
                 document.getElementById("departure").style.backgroundColor = "white";
 
-                document.getElementById("return").classList.remove("non-interagibile");
+                window.speechHandler.setElementInteractive(document.getElementById("return"), true);
                 document.getElementById("return").style.backgroundColor = "white";
             }, 1500);
 
         } else {
-            if (containsKeyword(testo, "scegli")) {
-                document.getElementById("destination").classList.add("non-interagibile");
+            if (window.speechHandler.containsKeyword(testo, "scegli")) {
+                window.speechHandler.setElementInteractive(document.getElementById("destination"), false);
                 document.getElementById("destination").style.backgroundColor = "red";
-            } else if (containsKeyword(testo, "ritorno")) {
-                document.getElementById("departure").classList.remove("non-interagibile");
+            } else if (window.speechHandler.containsKeyword(testo, "ritorno")) {
+                window.speechHandler.setElementInteractive(document.getElementById("destination"), true);
                 document.getElementById("departure").style.backgroundColor = "white";
 
-                document.getElementById("return").classList.add("non-interagibile");
+                window.speechHandler.setElementInteractive(document.getElementById("return"), false);
                 document.getElementById("return").style.backgroundColor = "red";
-            } else if (containsKeyword(testo, "partenza")) {
-                document.getElementById("return").classList.remove("non-interagibile");
+            } else if (window.speechHandler.containsKeyword(testo, "partenza")) {
+                window.speechHandler.setElementInteractive(document.getElementById("return"), true);
                 document.getElementById("return").style.backgroundColor = "white";
 
-                document.getElementById("departure").classList.add("non-interagibile");
+                window.speechHandler.setElementInteractive(document.getElementById("departure"), false);
                 document.getElementById("departure").style.backgroundColor = "red";
             }
         }
@@ -310,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else if (tag === 'select') {
                         // Per i select, lo clicco per aprire la tendina
                         //element.focus(); // Porta il focus sul select
-                        showSelectOverlay(element.id);
+                        window.speechHandler.showSelectOverlay(element.id);
                     } else if (tag === 'input') {
                         // Per gli input, posso distinguere tra quelli di tipo date e gli altri
                         if (element.type === 'date') {
