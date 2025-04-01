@@ -107,6 +107,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Mostra un overlay con le scelte del select perché da codice non si può mostrare programmaticamente
+    // le opzioni del select, quindi le leggo e le mostro in un overlay che se si clicca un elemento, svolge
+    // le stesse funzioni del select normale
     function showSelectOverlay(selectId) {
         var elemento = document.getElementById(selectId);
 
@@ -158,6 +161,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // questa funzione controlla che una keyword sia contenuta in una stringa, ad esempio un comando
+    // in una frase
     function containsKeyword(stringa, keyword){
         return stringa.includes(keyword);
     }
@@ -177,6 +182,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Configura il MutationObserver per monitorare il nodo di testo dentro "output"
     observer.observe(output, { childList: true, characterData: true, subtree: true });
 
+    // aggiorna le cose che possono essere modificate o meno tramite una classe che viene aggiunta o
+    // rimossa
     function aggiornaInterattività(testo) {
         console.log("aggiorno interattività")
         if (testo.trim() === "") {
@@ -277,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const departureRegex = /partenza (\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(\d{4})/i;
     const returnRegex = /ritorno (\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(\d{4})/i;
 
-    // Aggiungi il comando vocale "imposta partenza"
+    // Aggiunge il comando vocale "imposta partenza"
     window.speechHandler.addVocalCommand(departureRegex, (transcript) => {
         const departureInput = document.getElementById("departure");
 
@@ -298,6 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Aggiunge il comando vocale "imposta ritorno"
     window.speechHandler.addVocalCommand(returnRegex, (transcript) => {
         const returnInput = document.getElementById("return");
 

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech Recognition</title>
+  <style>
+    /* Layout a due colonne */
+    .container {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px;
+    }
+    /* Finestra di riconoscimento vocale */
+    .recognition-box {
+      width: 45%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      height: 350px;
+      overflow-y: scroll;
+      font-family: Arial, sans-serif;
+    }
+    /* Finestra con menu */
+    .window {
+      width: 45%;
+      height: 300px;
+      border: 1px solid #ccc;
+      background-color: white;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      font-family: Arial, sans-serif;
+    }
+    .window-header {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    .menu-item {
+      padding: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background-color 0.3s ease;
+    }
+    .menu-item:hover,
+    .menu-item.selected {
+      background-color: #555;
+      color: #fff;
+    }
+    .window-content {
+      padding: 20px;
+      height: calc(100% - 40px);
+      overflow: auto;
+    }
+    /* Stile per il pulsante di toggle */
+    #toggleButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    #toggleButton.off {
+      background-color: #f44336;
+    }
+  </style>
+</head>
+<body>
+<h2>Demo interazione modalità combinata</h2>
+
+<a href="../index.html" style="display: inline-flex; align-items: center; background: white; color: #ff5277; border: none; border-radius: 50px; padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); text-decoration: none; transition: .3s;">
+  <span style="margin-right: 8px;">🏠</span> Home
+</a>
+
+<div class="container">
+  <!-- Sezione per il riconoscimento vocale -->
+  <div class="recognition-box">
+    <h1>Riconoscimento vocale</h1>
+    <p>Puoi anche premere il pulsante "m" sulla tastiera per avviare/fermare il riconoscimento</p>
+    <button id="toggleButton" class="off">Attiva Riconoscimento</button>
+    <div id="output" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc; height: 100px; overflow-y: scroll;"></div>
+  </div>
+</div>
+
+<!-- Finestra con il menu -->
+<div id="window" class="window">
+  <div class="window-header">
+    <div class="menu">
+      <ul>
+        <li class="menu-item" id="multiaction">Multifunzione</li>
+      </ul>
+    </div>
+  </div>
+  <div class="window-content">
+    <p>Questo tasto ha il nome <i>multiaction</i>, ma ha anche un alias <i>ciao</i>, quindi
+    può essere selezionato con il comando <strong>seleziona multiaction</strong> ma anche
+    <strong>seleziona ciao</strong>.<br>
+    Può svolgere tre funzioni diverse nel caso di click vocale, click col mouse o input
+    combinato. Per il comando combinato, attivare il riconoscimento vocale, effettuare un
+    long press sul tasto e nel frattempo dire <strong>combinato</strong>, quindi smettere di
+    cliccare (quando viene rilasciato il long press, il background del tasto si colora di rosso).</p>
+  </div>
+</div>
+
+<div>
+ Premi il bottone e parla
+</div>
+
+<script src="../js/speech_recognition.js"></script>
+<script src="../js/prova2.js"></script>
+</body>
+</html>

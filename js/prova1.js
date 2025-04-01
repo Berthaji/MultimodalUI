@@ -16,7 +16,7 @@ window.onload = function () {
 
     // SET AZIONI COMANDI VOCALI BASE (associazione componente a un'azione)
 
-
+    // comando file
     window.speechHandler.onVocalClick('file', (menuItem) => {
         // Azione personalizzata per "File"
         console.log("Azione per File registrata!");
@@ -28,6 +28,7 @@ window.onload = function () {
         }, 2000);  // Ripristina dopo 2 secondi
     });
 
+    // comando visualizza
     window.speechHandler.onVocalClick('visualizza', (menuItem) => {
         // Azione per "Visualizza"
         console.log("Azione per Visualizza registrata!");
@@ -39,6 +40,7 @@ window.onload = function () {
         }, 2000);  // Ripristina dopo 2 secondi
     });
 
+    // comando modifica
     window.speechHandler.onVocalClick('modifica', (menuItem) => {
         // Azione per "Modifica"
         console.log("Azione per Modifica registrata!");
@@ -50,6 +52,7 @@ window.onload = function () {
         }, 2000);  // Ripristina dopo 2 secondi
     });
 
+    // comando strumenti
     window.speechHandler.onVocalClick('strumenti', (menuItem) => {
         // Azione per "Strumenti"
         console.log("Azione per Strumenti registrata!");
@@ -60,6 +63,7 @@ window.onload = function () {
         }, 2000);  // Ripristina dopo 2 secondi
     });
 
+    // comando opzioni
     window.speechHandler.onVocalClick('opzioni', (menuItem) => {
         // Azione per "Opzioni"
         console.log("Azione per Opzioni registrata!");
@@ -89,7 +93,6 @@ window.onload = function () {
 
 
     //SET COMANDI BASE INPUT MOUSE
-
     window.speechHandler.onMouseClick('file', (menuItem) => {
         console.log("Azione per File registrata con il mouse!");
 
@@ -135,7 +138,3 @@ window.onload = function () {
         }, 500);
     });
 };
-
-
-//manca gestione dei conflitti tra mouse e vocale
-// (non posso cliccare col mouse qualcosa mentre sto cliccando con la voce)

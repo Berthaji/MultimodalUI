@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let lastClickedElement = null;  // Variabile per tenere traccia dell'elemento già cliccato
 
+    // aggiunge il comando click
     window.speechHandler.addVocalCommand("click", () => {
         console.log("Comando vocale 'clicca' attivato");
 
@@ -83,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // mostra un overlay per il select come per agenzia.js
     function showSelectOverlay(selectId) {
         var elemento = document.getElementById(selectId);
 
@@ -134,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // controlla che una stringa contenga una determinata keyword
     function containsKeyword(stringa, keyword){
         return stringa.includes(keyword);
     }
@@ -153,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Configura il MutationObserver per monitorare il nodo di testo dentro "output"
     observer.observe(output, { childList: true, characterData: true, subtree: true });
 
+    // aggiorna interattività come per agenzia.js
     function aggiornaInterattività(testo) {
         console.log("aggiorno interattività")
         if (testo.trim() === "") {
@@ -194,18 +198,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // mostra una stringa nela div di output
     function showMessage(msg) {
         const outputDiv = document.getElementById("output");
         outputDiv.textContent = msg;
         setTimeout(() => { outputDiv.textContent = ""; }, 3000);
     }
 
+    // seleziona una destinazione
     function selectDestination(city) {
         const destinationSelect = document.getElementById("destination");
         destinationSelect.value = city;
         destinationSelect.dispatchEvent(new Event("change"));
     }
 
+    // comandi scelta città
     const cityCommands = {
         "scegli roma": "Roma",
         "scegli parigi": "Parigi",
@@ -213,6 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "scegli tokyo": "Tokyo"
     };
 
+    // aggiunge ogni comando di scelta città
     Object.keys(cityCommands).forEach(command => {
         window.speechHandler.addVocalCommand(command, () => {
             selectDestination(cityCommands[command]);
@@ -231,6 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return months[monthName.toLowerCase()] || null;
     }
 
+    // regex che controllano la sintassi dei comandi di partenza o ritorno
     const departureRegex = /partenza (\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(\d{4})/i;
     const returnRegex = /ritorno (\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(\d{4})/i;
 
@@ -247,6 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Aggiungi il comando vocale "imposta ritorno"
     window.speechHandler.addVocalCommand(returnRegex, (transcript) => {
         let returnMatch = transcript.match(returnRegex);
         if (returnMatch) {
@@ -259,11 +269,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // aggiunta del comando prenota
     window.speechHandler.addVocalCommand("prenota", () => {
         document.getElementById('bookButton').click();
         showMessage("Prenotazione avviata");
     });
 
+    // prenotazione mediante click del mouse
     window.speechHandler.onMouseClick('bookButton', () => {
         let dest = document.getElementById("destination").value;
         let dep = document.getElementById("departure").value;
@@ -283,6 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let labelsVisible = false;
     let activeCommands = [];
 
+    // funziona che mostra le etichette numeriche per ogni elemento interattivo della pagina html
     function toggleNumericLabels() {
         const interactiveElements = document.querySelectorAll('button, a, input, select');
         const toggleButton = document.getElementById('toggleLabels');
