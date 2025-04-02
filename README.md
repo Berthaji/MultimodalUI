@@ -34,7 +34,7 @@ http-server
 Tra diversi sistemi operativi, Windows e Mac (Apple) vi è una diversa gestione dei percorsi. Infatti, su
 Windows i file locali dovrebbe essere letti con "/inizia/con/slash" mentre su Mac "inizia/senza/slash". Effettuare modifiche sui percorsi se si vede
 che qualcosa non viene caricato correttamente (sia Javascript che forniscono le funzionalità agli html ma
-anche le immagini), soprattutto nel caso non si utilizzi un server locale.
+anche le immagini), soprattutto nel caso non si utilizzi un server locale e si aprano i file accedendovi direttamente dalla cartella `html`.
 
 # Get Started
 Dopo essere arrivati sino a qui siamo pronti per visualizzare le prove di interazioni realizzate raggiungibili
@@ -120,6 +120,26 @@ Aggiunge un comando vocale personalizzato:
 
 ### `addVocalItemAlias(alias, itemName)`
 Aggiunge un alias per un elemento del menu, permettendo di selezionarlo con nomi alternativi.
+
+### `getElementUnderMouse()`
+Restituisce l'elemento attualmente sotto il cursore del mouse. È utile, per esempio, quando l'utente non può eseguire un click dal mouse, ma può almeno trascinare il cursore sopra l'elemento che vuole cliccare. Quindi, può essere usato per recuperare l'elemento e attivare
+un click con un comando vocale.
+
+### `isElementNonInteractive(element)`
+Verifica se l'elemento è "non-interagibile", per gestire i conflitti tra i vari tipi di interazione.
+
+### `setElementInteractive(element, isInteractive)`
+Imposta l'elemento come interagibile o non-interagibile.
+
+### `containsKeyword(stringa, keyword)`
+Verifica se una stringa contiene una parola chiave. È utile per bloccare certi elementi, rendendoli non-interagibili, nel momento in cui viene rilevata una certa parola.
+
+### `showSelectOverlay(selectId)`
+Mostra un overlay personalizzato per un elemento `select` con le sue opzioni. È utile come metodo di supporto per il funzionamento corretto di questi elementi nel caso di interazione vocale.
+
+
+
+
 
 # Descrizione delle prove di interazione
 ## Prova 0
