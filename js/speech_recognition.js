@@ -429,7 +429,7 @@ class SpeechRecognitionHandler {
      *
      * @example
      * // È utile quando l'utente non può eseguire un click dal mouse, ma può almeno trascinare il cursore sopra
-     * il cursore sull'elemento che vuole cliccare. Quindi, può essere usato per recuperare l'elemento e attivare
+     * l'elemento che vuole cliccare. Quindi, può essere usato per recuperare l'elemento e attivare
      * un click con un comando vocale.
      */
     getElementUnderMouse() {
@@ -448,7 +448,8 @@ class SpeechRecognitionHandler {
      * @param {HTMLElement} element - L'elemento HTML da verificare.
      * @returns {boolean} `true` se l'elemento è "non-interagibile", `false` altrimenti.
      *
-     */    isElementNonInteractive(element) {
+     */    
+    isElementNonInteractive(element) {
         return element && element.classList.contains("non-interagibile");
     }
 
