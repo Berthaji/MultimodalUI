@@ -149,9 +149,15 @@ Mostra un overlay personalizzato per un elemento `select` con le sue opzioni. È
 ## Prova 1
 > Contiene una prima interazione di elementi del sito web mediante voce. In particolare si
 > interagisce con gli elementi di una lista, i quali cambiano colore.
+> Con un click breve del mouse, il testo all'interno dell'elemento cliccato si colora di rosso.
+> Utilizzando la selezione di un elemento e successivamente il click vocale, il background dell'elemento viene colorato.
+> È presente una gestione dei conflitti, perciò se viene cliccato un elemento nel mentre che viene cliccato vocalmente e l'azione vocale è in esecuzione, il click manuale viene ignorato.
+> Vengono introdotti i comandi vocali personalizzati. Nella demo, il comando vocale `colora` esegue l'azione legata al click vocale per ogni elemento della lista, a turno.
 
 ## Prova 2
-> Vengono introdotti gli alias per dire parole diverse che si riferiscono allo stesso comando.
+> Vengono introdotti gli alias per dire parole diverse che si riferiscono allo stesso comando. In particolare, l'elemento della lista presente può essere selezionato con il comando `seleziona multiaction`, ovvero utilizzando il suo ID, oppure con il comando `seleziona bottone`.
+> Il secondo obiettivo di questa demo è mostrare il funzionamento dei comandi combinati: effettuando un long press col mouse sull'elemento della lista e, nel frattempo, pronunciando il comando vocale `combinato`, al rilascio del long press il background dell'elemento si colora di rosso.
+> Per distinguere dal comando combinato, in caso di azione vocale attivata dal comando `clicca` il background dell'elemento si colora di verde, in caso di click breve col mouse il testo dentro l'elemento si colora di verde.
 
 ## Agenzia Viaggi
 
