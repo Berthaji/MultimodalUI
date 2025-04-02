@@ -16,63 +16,85 @@ window.onload = function () {
 
     // SET AZIONI COMANDI VOCALI BASE (associazione componente a un'azione)
 
-    // comando file
+
     window.speechHandler.onVocalClick('file', (menuItem) => {
-        // Azione personalizzata per "File"
         console.log("Azione per File registrata!");
 
-        // Cambia il colore per il menu qui
-        menuItem.style.backgroundColor = "#f0f0f0";  // Colore di esempio
+        // Rende il menuItem non interagibile
+        window.speechHandler.setElementInteractive(menuItem, false);
+
+        // Applica lo stile
+        menuItem.style.backgroundColor = "#f0f0f0";
+
+        // Dopo 2 secondi: resetta colore e rende di nuovo interagibile
         setTimeout(() => {
-            menuItem.style.backgroundColor = "";  // Ripristina il colore
-        }, 2000);  // Ripristina dopo 2 secondi
+            menuItem.style.backgroundColor = "";
+            window.speechHandler.setElementInteractive(menuItem, true);
+        }, 2000);
     });
 
-    // comando visualizza
     window.speechHandler.onVocalClick('visualizza', (menuItem) => {
-        // Azione per "Visualizza"
         console.log("Azione per Visualizza registrata!");
 
-        // Cambia il colore per il menu qui
-        menuItem.style.backgroundColor = "#ee00ff";  // Colore di esempio
+        // Rende il menuItem non interagibile
+        window.speechHandler.setElementInteractive(menuItem, false);
+
+        // Applica lo stile
+        menuItem.style.backgroundColor = "#ee00ff";
+
+        // Dopo 2 secondi: resetta colore e rende di nuovo interagibile
         setTimeout(() => {
-            menuItem.style.backgroundColor = "";  // Ripristina il colore
-        }, 2000);  // Ripristina dopo 2 secondi
+            menuItem.style.backgroundColor = "";
+            window.speechHandler.setElementInteractive(menuItem, true);
+        }, 2000);
     });
 
-    // comando modifica
     window.speechHandler.onVocalClick('modifica', (menuItem) => {
-        // Azione per "Modifica"
         console.log("Azione per Modifica registrata!");
 
-        // Cambia il colore per il menu qui
-        menuItem.style.backgroundColor = "rgba(85,179,17,0.93)";  // Colore di esempio
+        // Rende il menuItem non interagibile
+        window.speechHandler.setElementInteractive(menuItem, false);
+
+        // Applica lo stile
+        menuItem.style.backgroundColor = "rgba(85,179,17,0.93)";
+
+        // Dopo 2 secondi: resetta colore e rende di nuovo interagibile
         setTimeout(() => {
-            menuItem.style.backgroundColor = "";  // Ripristina il colore
-        }, 2000);  // Ripristina dopo 2 secondi
+            menuItem.style.backgroundColor = "";
+            window.speechHandler.setElementInteractive(menuItem, true);
+        }, 2000);
     });
 
-    // comando strumenti
     window.speechHandler.onVocalClick('strumenti', (menuItem) => {
-        // Azione per "Strumenti"
         console.log("Azione per Strumenti registrata!");
-        // Cambia il colore per il menu qui
-        menuItem.style.backgroundColor = "#fff200";  // Colore di esempio
+
+        // Rende il menuItem non interagibile
+        window.speechHandler.setElementInteractive(menuItem, false);
+
+        // Applica lo stile
+        menuItem.style.backgroundColor = "#fff200";
+
+        // Dopo 2 secondi: resetta colore e rende di nuovo interagibile
         setTimeout(() => {
-            menuItem.style.backgroundColor = "";  // Ripristina il colore
-        }, 2000);  // Ripristina dopo 2 secondi
+            menuItem.style.backgroundColor = "";
+            window.speechHandler.setElementInteractive(menuItem, true);
+        }, 2000);
     });
 
-    // comando opzioni
     window.speechHandler.onVocalClick('opzioni', (menuItem) => {
-        // Azione per "Opzioni"
-        console.log("Azione per Opzioni registrata!");
+        console.log("Azione per Strumenti registrata!");
 
-        // Cambia il colore per il menu qui
-        menuItem.style.backgroundColor = "#00ffe1";  // Colore di esempio
+        // Rende il menuItem non interagibile
+        window.speechHandler.setElementInteractive(menuItem, false);
+
+        // Applica lo stile
+        menuItem.style.backgroundColor = "#00ffe1";
+
+        // Dopo 2 secondi: resetta colore e rende di nuovo interagibile
         setTimeout(() => {
-            menuItem.style.backgroundColor = "";  // Ripristina il colore
-        }, 2000);  // Ripristina dopo 2 secondi
+            menuItem.style.backgroundColor = "";
+            window.speechHandler.setElementInteractive(menuItem, true);
+        }, 2000);
     });
 
     //ESEMPIO: AGGIUNTA NUOVO COMANDO CUSTOM
@@ -93,48 +115,80 @@ window.onload = function () {
 
 
     //SET COMANDI BASE INPUT MOUSE
+
     window.speechHandler.onMouseClick('file', (menuItem) => {
         console.log("Azione per File registrata con il mouse!");
 
-        menuItem.style.color = "#aa0f0f";  // Cambia il colore del testo
+        // Se NON è interagibile, blocca l’azione
+        if (window.speechHandler.isElementNonInteractive(menuItem)) {
+            return;
+        }
+
+        // Altrimenti, esegui l’azione
+        menuItem.style.color = "#aa0f0f";
         setTimeout(() => {
-            menuItem.style.color = "";  // Ripristina il colore originale del testo
+            menuItem.style.color = "";
         }, 500);
     });
 
     window.speechHandler.onMouseClick('modifica', (menuItem) => {
-        console.log("Azione per File registrata con il mouse!");
+        console.log("Azione per Modifica registrata con il mouse!");
 
-        menuItem.style.color = "#aa0f0f";  // Cambia il colore del testo
+        // Se NON è interagibile, blocca l’azione
+        if (window.speechHandler.isElementNonInteractive(menuItem)) {
+            return;
+        }
+
+        // Altrimenti, esegui l’azione
+        menuItem.style.color = "#aa0f0f";
         setTimeout(() => {
-            menuItem.style.color = "";  // Ripristina il colore originale del testo
+            menuItem.style.color = "";
         }, 500);
     });
 
-    window.speechHandler.onMouseClick('visualizza', (menuItem) => {
-        console.log("Azione per File registrata con il mouse!");
+    window.speechHandler.onMouseClick('visualizza',(menuItem) => {
+        console.log("Azione per Visualizza registrata con il mouse!");
 
-        menuItem.style.color = "#aa0f0f";  // Cambia il colore del testo
+        // Se NON è interagibile, blocca l’azione
+        if (window.speechHandler.isElementNonInteractive(menuItem)) {
+            return;
+        }
+
+        // Altrimenti, esegui l’azione
+        menuItem.style.color = "#aa0f0f";
         setTimeout(() => {
-            menuItem.style.color = "";  // Ripristina il colore originale del testo
+            menuItem.style.color = "";
         }, 500);
     });
 
     window.speechHandler.onMouseClick('strumenti', (menuItem) => {
-        console.log("Azione per File registrata con il mouse!");
+        console.log("Azione per Opzioni registrata con il mouse!");
 
-        menuItem.style.color = "#aa0f0f";  // Cambia il colore del testo
+        // Se NON è interagibile, blocca l’azione
+        if (window.speechHandler.isElementNonInteractive(menuItem)) {
+            return;
+        }
+
+        // Altrimenti, esegui l’azione
+        menuItem.style.color = "#aa0f0f";
         setTimeout(() => {
-            menuItem.style.color = "";  // Ripristina il colore originale del testo
+            menuItem.style.color = "";
         }, 500);
     });
 
-    window.speechHandler.onMouseClick('opzioni', (menuItem) => {
+    window.speechHandler.onMouseClick('opzioni',(menuItem) => {
         console.log("Azione per File registrata con il mouse!");
 
-        menuItem.style.color = "#aa0f0f";  // Cambia il colore del testo
+        // Se NON è interagibile, blocca l’azione
+        if (window.speechHandler.isElementNonInteractive(menuItem)) {
+            return;
+        }
+
+        // Altrimenti, esegui l’azione
+        menuItem.style.color = "#aa0f0f";
         setTimeout(() => {
-            menuItem.style.color = "";  // Ripristina il colore originale del testo
+            menuItem.style.color = "";
         }, 500);
     });
 };
+
