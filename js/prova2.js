@@ -1,9 +1,9 @@
 // Inizializza l'oggetto quando la pagina è caricata
 window.onload = function () {
     window.speechHandler = new SpeechRecognitionHandler();
-    // assegno il nuovo nome vocale "ciao" all'item multiaction (funziona sia multiaction che ciao)
-    window.speechHandler.addVocalItemAlias('ciao', 'multiaction');
-    //faccio ripartire il riconoscimento per riconoscere anche l'alias di multiaction
+    // Si assegna nuovo nome vocale "bottone" all'item multiaction (funziona sia multiaction che bottone)
+    window.speechHandler.addVocalItemAlias('bottone', 'multiaction');
+    // Riparte il riconoscimento per riconoscere anche l'alias di multiaction
     window.speechHandler.initRecognition();
 
     // Assegna il pulsante al metodo toggleListening

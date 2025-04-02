@@ -16,14 +16,13 @@ window.onload = function () {
 
     // SET AZIONI COMANDI VOCALI BASE (associazione componente a un'azione)
 
-
     window.speechHandler.onVocalClick('file', (menuItem) => {
         console.log("Azione per File registrata!");
 
-        // Rende il menuItem non interagibile
+        // Rende l'elemento non interagibile
         window.speechHandler.setElementInteractive(menuItem, false);
 
-        // Applica lo stile
+        // Applica lo stile del background
         menuItem.style.backgroundColor = "#f0f0f0";
 
         // Dopo 2 secondi: resetta colore e rende di nuovo interagibile
@@ -36,10 +35,10 @@ window.onload = function () {
     window.speechHandler.onVocalClick('visualizza', (menuItem) => {
         console.log("Azione per Visualizza registrata!");
 
-        // Rende il menuItem non interagibile
+        // Rende l'elemento non interagibile
         window.speechHandler.setElementInteractive(menuItem, false);
 
-        // Applica lo stile
+        // Applica lo stile del background
         menuItem.style.backgroundColor = "#ee00ff";
 
         // Dopo 2 secondi: resetta colore e rende di nuovo interagibile
@@ -52,10 +51,10 @@ window.onload = function () {
     window.speechHandler.onVocalClick('modifica', (menuItem) => {
         console.log("Azione per Modifica registrata!");
 
-        // Rende il menuItem non interagibile
+        // Rende l'elemento non interagibile
         window.speechHandler.setElementInteractive(menuItem, false);
 
-        // Applica lo stile
+        // Applica lo stile del background
         menuItem.style.backgroundColor = "rgba(85,179,17,0.93)";
 
         // Dopo 2 secondi: resetta colore e rende di nuovo interagibile
@@ -68,10 +67,10 @@ window.onload = function () {
     window.speechHandler.onVocalClick('strumenti', (menuItem) => {
         console.log("Azione per Strumenti registrata!");
 
-        // Rende il menuItem non interagibile
+        // Rende l'elemento non interagibile
         window.speechHandler.setElementInteractive(menuItem, false);
 
-        // Applica lo stile
+        // Applica lo stile del background
         menuItem.style.backgroundColor = "#fff200";
 
         // Dopo 2 secondi: resetta colore e rende di nuovo interagibile
@@ -84,10 +83,10 @@ window.onload = function () {
     window.speechHandler.onVocalClick('opzioni', (menuItem) => {
         console.log("Azione per Strumenti registrata!");
 
-        // Rende il menuItem non interagibile
+        // Rende l'elemento non interagibile
         window.speechHandler.setElementInteractive(menuItem, false);
 
-        // Applica lo stile
+        // Applica lo stile del background
         menuItem.style.backgroundColor = "#00ffe1";
 
         // Dopo 2 secondi: resetta colore e rende di nuovo interagibile
@@ -96,6 +95,7 @@ window.onload = function () {
             window.speechHandler.setElementInteractive(menuItem, true);
         }, 2000);
     });
+
 
     //ESEMPIO: AGGIUNTA NUOVO COMANDO CUSTOM
     // Impostiamo il comando "colora" per colorare tutti gli elementi del menu
@@ -124,7 +124,7 @@ window.onload = function () {
             return;
         }
 
-        // Altrimenti, esegui l’azione
+        // Altrimenti, esegue l’azione (modifica colore testo)
         menuItem.style.color = "#aa0f0f";
         setTimeout(() => {
             menuItem.style.color = "";
@@ -139,7 +139,7 @@ window.onload = function () {
             return;
         }
 
-        // Altrimenti, esegui l’azione
+        // Altrimenti, esegue l’azione
         menuItem.style.color = "#aa0f0f";
         setTimeout(() => {
             menuItem.style.color = "";
@@ -154,7 +154,7 @@ window.onload = function () {
             return;
         }
 
-        // Altrimenti, esegui l’azione
+        // Altrimenti, esegue l’azione
         menuItem.style.color = "#aa0f0f";
         setTimeout(() => {
             menuItem.style.color = "";
@@ -169,7 +169,7 @@ window.onload = function () {
             return;
         }
 
-        // Altrimenti, esegui l’azione
+        // Altrimenti, esegue l’azione
         menuItem.style.color = "#aa0f0f";
         setTimeout(() => {
             menuItem.style.color = "";
@@ -184,7 +184,7 @@ window.onload = function () {
             return;
         }
 
-        // Altrimenti, esegui l’azione
+        // Altrimenti, esegue l’azione
         menuItem.style.color = "#aa0f0f";
         setTimeout(() => {
             menuItem.style.color = "";
