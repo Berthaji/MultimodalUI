@@ -17,11 +17,7 @@ Dopo aver fatto qualsiasi modifica al file JavaScript (attenzione, non quello de
 ```bash
 npx webpack
 ```
-
-## Berthaji_prova - Descrizione e installazione delle dipendenze
-
-La cartella include una prova di sistema di speech recognition che non utilizza API o librerie non standard. Contiene un file `main.js` che si occupa di fare da ponte tra il file `index.html` e tutte le altre parti utili, chiamando le funzioni necessarie all'interazione coi bottoni. Il file `recorder.js` serve a registrare i comandi che poi potranno essere utilizzati nell'interfaccia, il file `recognizer.js` riconosce i comandi registrati ed esegue l'azione collegata. Entrambi i file si appoggiano a `audio-processor.js` per elaborare l'audio. I comandi salvati non vengono salvati perennemente, valgono solo per la run corrente.
-Per l'installazione di http-server:
+Per eseguire il progetto su un server locale, è necessaria l'installazione di http-server:
 
 ```bash
 npm install -g http-server
@@ -33,13 +29,12 @@ Per l'avvio del server basta eseguire il comando:
 http-server
 ```
 
-Questo comando porta a localhost, a cui basta aggiungere il percorso `berthaji_prova/index.html` per aprire la prova di interfaccia.
 
 # ⚠️⚠️ATTENZIONE⚠️⚠️:
-Tra diversi sistemi operativi, Windows e Mac (Apple) vi è una diversa gestione dei percorsi. Infatti su
-Windows nei file dovrebbe essere "/inizia/con/slash" mentre su Mac "inizia/senza/slash". Cambiarlo se si vede
+Tra diversi sistemi operativi, Windows e Mac (Apple) vi è una diversa gestione dei percorsi. Infatti, su
+Windows i file locali dovrebbe essere letti con "/inizia/con/slash" mentre su Mac "inizia/senza/slash". Effettuare modifiche sui percorsi se si vede
 che qualcosa non viene caricato correttamente (sia Javascript che forniscono le funzionalità agli html ma
-anche le immagini).
+anche le immagini), soprattutto nel caso non si utilizzi un server locale.
 
 # Get Started
 Dopo essere arrivati sino a qui siamo pronti per visualizzare le prove di interazioni realizzate raggiungibili
@@ -95,8 +90,8 @@ Gestisce i comandi vocali:
 - Esegue comandi personalizzati.
 - Supporta comandi con espressioni regolari.
 
-### `selectMenuItem(menu)`
-Seleziona un elemento del menu dato il suo `id` HTML, evidenziandolo con la classe `selected`.
+### `selectMenuItem(item)`
+Seleziona un elemento dato il suo `id` HTML, evidenziandolo con la classe `selected`.
 
 ### `clearSelection()`
 Rimuove la selezione da tutti gli elementi del menu.
@@ -106,17 +101,17 @@ Esegue l'azione associata all'elemento selezionato:
 - Se `fromVoiceCommand` è `true`, esegue l'azione vocale.
 - Se `false`, esegue l'azione associata al mouse.
 
-### `combinedClickMenuItem(item_name)`
-Gestisce le interazioni combinate (pressione lunga + comando vocale) per un elemento del menu.
+### `combinedClickMenuItem(item_Name)`
+Gestisce ed esegue le azioni combinate (pressione lunga + comando vocale) per un elemento.
 
-### `onVocalClick(menuName, action)`
-Associa un'azione personalizzata a un comando vocale per un elemento del menu.
+### `onVocalClick(itemName, action)`
+Associa un'azione personalizzata a un comando vocale per un elemento.
 
-### `onMouseClick(menuName, action)`
-Associa un'azione personalizzata a un click del mouse su un elemento del menu.
+### `onMouseClick(itemName, action)`
+Associa un'azione personalizzata a un click del mouse su un elemento.
 
-### `onCombinedInput(menuName, keyword, action)`
-Registra un'azione combinata tra pressione lunga del mouse e comando vocale.
+### `onCombinedInput(itemName, keyword, action)`
+Registra un'azione combinata tra pressione lunga del mouse e comando vocale, registrato come keyword.
 
 ### `addVocalCommand(command, callback)`
 Aggiunge un comando vocale personalizzato:
@@ -124,7 +119,7 @@ Aggiunge un comando vocale personalizzato:
 - Se `command` è una regex, lo salva per future corrispondenze dinamiche.
 
 ### `addVocalItemAlias(alias, itemName)`
-Aggiunge un alias per un elemento del menu, permettendo di attivarlo con nomi alternativi.
+Aggiunge un alias per un elemento del menu, permettendo di selezionarlo con nomi alternativi.
 
 # Descrizione delle prove di interazione
 ## Prova 0
